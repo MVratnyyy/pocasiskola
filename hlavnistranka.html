@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Měst</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  .dashboard {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  .box {
+    background: #007BFF;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    transition: background 0.3s ease;
+  }
+  .box:hover {
+    background: #0056b3;
+    cursor: pointer;
+  }
+  a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.5em;
+  }
+</style>
+</head>
+<body>
+    <h1><a href="hlavnistranka.html" style="color: blue;">VRATNY-METEO</a></h1>&nbsp;
+<div class="dashboard">
+  <div class="box"><a href="praha.html">Praha</a></div>
+  <div class="box"><a href="berlin.html">Berlín</a></div>
+  <div class="box"><a href="budapest.html">Budapešť</a></div>
+  <div class="box"><a href="bratislava.html">Bratislava</a></div>
+  <div class="box"><a href="viden.html">Vídeň</a></div>
+</div>
+</body>
+</html>

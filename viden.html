@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7denní Předpověď Počasí pro Vídeň</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e0e0e0;
+    margin: 0;
+    padding: 20px;
+  }
+  .weather-container, .forecast-container {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .city {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333333;
+  }
+  .forecast-day {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #f9f9f9;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  .date {
+    font-size: 18px;
+    color: #666;
+  }
+  .temperature {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff9800;
+  }
+</style>
+</head>
+<body>
+    <h1><a href="hlavnistranka.html">VRATNY-METEO</a></h1>
+<div class="weather-container">
+  <div class="city">7denní Předpověď Počasí pro Vídeň</div>
+</div>
+<div class="forecast-container" id="forecast"></div>
+
+<script>
+function fetchWeather() {
+    const url = 'https://api.open-meteo.com/v1/forecast?latitude=48.2082&longitude=16.3738&daily=temperature_2m_max,temperature_2m_min&timezone=auto';
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      const forecastContainer = document.getElementById('forecast');
+      const days = data.daily.time;
+      const maxTemps = data.daily.temperature_2m_max;
+      const minTemps = data.daily.temperature_2m_min;
+
+      for (let i = 0; i < 7; i++) {
+        const day = document.createElement('div');
+        day.classList.add('forecast-day');
+
+        const date = document.createElement('div');
+        date.classList.add('date');
+        date.textContent = new Date(days[i]).toLocaleDateString('cs-CZ', { weekday: 'long', day: 'numeric', month: 'long' });
+
+        const temperature = document.createElement('div');
+        temperature.classList.add('temperature');
+        temperature.textContent = `Max: ${maxTemps[i]}°C, Min: ${minTemps[i]}°C`;
+
+        day.appendChild(date);
+        day.appendChild(temperature);
+
+        forecastContainer.appendChild(day);
+      }
+    })
+    .catch(error => {
+      console.error('Chyba při načítání dat o počasí:', error);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', fetchWeather);
+</script>
+</body>
+</html>
